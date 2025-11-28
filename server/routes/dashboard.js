@@ -140,10 +140,15 @@ router.get('/analytics', async (req, res) => {
       inventoryMetrics: inventoryMetrics[0],
       customerSegment: {
         totalCustomers: customerSegment.length,
-        averageOrderValueFromAll: 
-          customerSegment.reduce((acc, curr) => acc + curr.averageOrderValue, 0) / 
-          customerSegment.length || 0,
-      },
+        averageOrderValueFromAll: Number(
+  (customerSegment.reduce((acc, curr) => acc + curr.averageOrderValue, 0) / 
+  customerSegment.length || 0
+).toFixed(2)
+),
+      
+      
+      
+        },
       conversionRate: totalOrders && activeUsers 
         ? (totalOrders / activeUsers) * 100 
         : "0.00",
