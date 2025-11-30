@@ -29,7 +29,8 @@ async function connectDB() {
     return db;
   } catch (error) {
     console.error("Database connection error:", error);
-    process.exit(1);
+    // Instead of process.exit(1), throw error for serverless compatibility
+    throw error;
   }
 }
 
