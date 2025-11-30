@@ -12,8 +12,15 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
+
+// Resolve allowed origins from env
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map(origin => origin.trim())
+  : ['http://localhost:5170'];
+console.log('CORS allowed origins:', allowedOrigins);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL?.split(',') || ['http://localhost:5170'],
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
