@@ -16,21 +16,29 @@ app.use(express.urlencoded({ extended: true }));
 // Resolve allowed origins from env
 const allowedOrigins = process.env.CLIENT_URL
   ? process.env.CLIENT_URL.split(',').map(origin => origin.trim())
-  : ['http://localhost:5170'];
+  : ['http://localhost:5173'];
+
 console.log('CORS allowed origins:', allowedOrigins);
 
 app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('Blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Routes
-app.get('/', (req, res) => {
-  res.json({ message: 'E-commerce Dashboard API' });
-});
-
+// Important: Handle preflight requests
+app.options('*', cors());
 app.use('/api/dashboard', dashboardRoutes);
 
 // Start server

@@ -17,25 +17,42 @@ export default function Dashboard() {
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState(null)
 
-  useEffect(() => {
+  const API_BASE_URL = import.meta.env.VITE_SERVER_URL;
 
-    const fetchData = async ()=> {
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/analytics`)
-            setData(response.data)
-            console.log(response);
-            
-        } catch (error) {
-            setError(error)
-            setLoading(false)
-        } finally {
-            setLoading(false)
-        }
+   const fetchAnalytics = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/analytics`, {
+      method: 'GET',
+      credentials: 'include', // Important for CORS
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    fetchData()
-  }, [])
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching analytics:', error);
+    throw error;
+  }
+};
 
+useEffect(() => {
+  const loadData = async () => {
+    try {
+      const data = await fetchAnalytics();
+      console.log(data);
+    } catch (error) {
+      console.error('Failed to load analytics:', error);
+    }
+  };
+  
+  loadData();
+}, []);
   if (loading) return <Loader/>
   if (error) return <div>Error: {error.message}</div>
 
