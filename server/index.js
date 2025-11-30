@@ -14,7 +14,7 @@ app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: ['https://e-commerce-dashboard-self-one.vercel.app' , 'https://e-commerce-dashboard-server.vercel.app', 'https://e-commerce-dashboard-server.vercel.app/api/dashboard/analytics'],
+  origin:true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
