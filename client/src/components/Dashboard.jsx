@@ -21,7 +21,7 @@ export default function Dashboard() {
 
    const fetchAnalytics = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/analytics`, {
+    const response = await fetch(`${API_BASE_URL}analytics`, {
       method: 'GET',
       credentials: 'include', // Important for CORS
       headers: {
