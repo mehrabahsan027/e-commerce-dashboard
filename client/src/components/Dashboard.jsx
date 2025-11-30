@@ -17,11 +17,20 @@ export default function Dashboard() {
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState(null)
 
-  const API_BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const API_BASE_URL = import.meta.env.VITE_SERVER_URL 
+  // 'http://localhost:3000/api/dashboard/analytics'
+ 
+  let url
+  if(API_BASE_URL) url = `${API_BASE_URL}/api/dashboard/analytics`
+  else {
+    url = 'http://localhost:3000/api/dashboard/analytics'
+  }
+
+
 
    const fetchAnalytics = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}analytics`, {
+    const response = await fetch(`${url}`, {
       method: 'GET',
       credentials: 'include', // Important for CORS
       headers: {
@@ -34,8 +43,11 @@ export default function Dashboard() {
     }
 
     const data = await response.json();
+    setData(data)
+    setLoading(false)
     return data;
   } catch (error) {
+    setError(error)
     console.error('Error fetching analytics:', error);
     throw error;
   }

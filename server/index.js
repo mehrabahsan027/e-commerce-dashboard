@@ -37,8 +37,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Important: Handle preflight requests
-app.options('*', cors());
 app.use('/api/dashboard', dashboardRoutes);
 
 // Start server
