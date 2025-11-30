@@ -36,9 +36,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Explicitly handle OPTIONS for all routes
-app.options('*', cors());
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
