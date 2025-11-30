@@ -7,6 +7,7 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import StatsCard from './StatsCard';
 import SalesChart from './SalesChart';
 import Chart from './Chart';
+import Loader from './Loader';
 
 
 
@@ -20,9 +21,9 @@ export default function Dashboard() {
 
     const fetchData = async ()=> {
         try {
-            const response = await axios.get('http://localhost:3000/api/dashboard/analytics')
+            const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/analytics`)
             setData(response.data)
-            console.log(response?.data);
+            console.log(response);
             
         } catch (error) {
             setError(error)
@@ -35,7 +36,7 @@ export default function Dashboard() {
     fetchData()
   }, [])
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <Loader/>
   if (error) return <div>Error: {error.message}</div>
 
   return (

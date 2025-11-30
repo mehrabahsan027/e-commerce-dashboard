@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 export default function SalesChart({ monthlySalesData, averageRevenue,totalOrders }) {
   // Format the data to show "Month Year" on X-axis and clean revenue
-  const formattedData = monthlySalesData.map(item => ({
+  const formattedData = monthlySalesData?.map(item => ({
     ...item,
     monthYear: new Date(item.year, item.month - 1).toLocaleDateString('en-US', {
       month: 'short',
@@ -12,10 +12,10 @@ export default function SalesChart({ monthlySalesData, averageRevenue,totalOrder
     revenue: Number(item.revenue.toFixed(2)) // Ensure clean number
   }));
 
-  const highest = monthlySalesData.sort((a, b) => b.revenue - a.revenue)[0];
+  const highest = monthlySalesData?.sort((a, b) => b.revenue - a.revenue)[0];
 
   // Sort by year and month just in case
-  const sortedData = formattedData.sort((a, b) => a.year - b.year || a.month - b.month);
+  const sortedData = formattedData?.sort((a, b) => a.year - b.year || a.month - b.month);
 
   return (
     <div className="w-full  md:max-w-6xl mx-auto mt-10 p-6 rounded-lg shadow-lg">
@@ -77,7 +77,7 @@ export default function SalesChart({ monthlySalesData, averageRevenue,totalOrder
 
 <div className=' space-y-3'>
         <h4 className='text-2xl text-stone-700 font-medium'>Highest Revenue</h4>
-        <p className='text-xl text-stone-600'>${highest.revenue}</p>
+        <p className='text-xl text-stone-600'>${highest?.revenue}</p>
 
       </div>
 <div className=' space-y-3'>
