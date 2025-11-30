@@ -1,6 +1,7 @@
 const express = require('express');
 const compression = require('compression');
 const cors = require('cors');
+require('dotenv').config();
 const { connectDB } = require('./config/db');
 const dashboardRoutes = require('./routes/dashboard');
 
