@@ -39,6 +39,11 @@ app.use(cors({
 
 app.use('/api/dashboard', dashboardRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+
 // Start server
 async function startServer() {
   await connectDB();
