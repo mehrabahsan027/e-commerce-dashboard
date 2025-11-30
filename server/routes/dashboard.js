@@ -23,7 +23,7 @@ router.get('/analytics', async (req, res) => {
       inventoryMetrics,
       customerSegment
     ] = await Promise.all([
-      
+
       // Active users
       db.collection("users").countDocuments(),
 
@@ -141,28 +141,28 @@ router.get('/analytics', async (req, res) => {
       customerSegment: {
         totalCustomers: customerSegment.length,
         averageOrderValueFromAll: Number(
-  (customerSegment.reduce((acc, curr) => acc + curr.averageOrderValue, 0) / 
-  customerSegment.length || 0
-).toFixed(2)
-),
-      
-      
-      
-        },
-      conversionRate: totalOrders && activeUsers 
-        ? (totalOrders / activeUsers) * 100 
+          (customerSegment.reduce((acc, curr) => acc + curr.averageOrderValue, 0) /
+            customerSegment.length || 0
+          ).toFixed(2)
+        ),
+
+
+
+      },
+      conversionRate: totalOrders && activeUsers
+        ? (totalOrders / activeUsers) * 100
         : "0.00",
     };
 
     // Cache the data
     cache.set('dashboardAnalytics', analyticsData, 300);
-    
+
     res.json(analyticsData);
   } catch (error) {
     console.error('Analytics error:', error);
-    res.status(500).json({ 
-      message: 'Internal server error', 
-      error: error.message 
+    res.status(500).json({
+      message: 'Internal server error',
+      error: error.message
     });
   }
 });
