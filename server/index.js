@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: ['https://e-commerce-dashboard-client.vercel.app', 'http://localhost:5170'],
+  origin: process.env.CLIENT_URL?.split(',') || ['http://localhost:5170'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
