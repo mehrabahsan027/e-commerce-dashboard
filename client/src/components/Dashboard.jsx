@@ -70,7 +70,7 @@ useEffect(() => {
 
   return (
     <div className='p-4  min-h-screen'>
-      <h1 className=' text-2xl sm:text-4xl text-center font-bold text-slate-400'>Dashboard</h1>
+      <h1 className=' text-2xl sm:text-4xl text-center font-bold text-slate-600'>Dashboard</h1>
 
 
       <div className='w-full sm:w-10/12 mx-auto my-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
