@@ -73,7 +73,7 @@ export default function SalesChart({ monthlySalesData, averageRevenue,totalOrder
       
       </ResponsiveContainer>
 
-<div className='flex flex-col md:flex-row px-5 items-center gap-y-5 md:gap-y-0 md:justify-between '>
+<div className='flex flex-col md:flex-row px-5 items-center gap-y-5 md:gap-y-0 md:justify-between mb-5'>
 
 <div className=' space-y-3'>
         <h4 className='text-2xl text-stone-700 font-medium'>Highest Revenue</h4>
