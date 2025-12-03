@@ -55,9 +55,9 @@ export default function Dashboard() {
 
   if (loading) return <Loader />
   if (error) return (
-    <div className="p-4 text-center">
-      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-        Error: {error.message}
+    <div className="p-4 text-center h-screen flex items-center justify-center">
+      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-lg font-medium">
+        Error: Something went wrong 
       </div>
     </div>
   )
