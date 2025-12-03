@@ -28,7 +28,7 @@ export default function SalesChart({ monthlySalesData, averageRevenue, totalOrde
           data={sortedData}
           margin={{ top: 10, right: 30, left: 20, bottom: 60 }}
         >
-          <CartesianGrid strokeDasharray="4 4" stroke="#e0e0e0" />
+          <CartesianGrid strokeDasharray="4 4" stroke="#7f8c8d" />
 
           <XAxis
             dataKey="monthYear"
